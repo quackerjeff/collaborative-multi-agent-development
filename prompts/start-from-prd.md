@@ -1,6 +1,6 @@
 # Start From PRD
 
-Use this prompt when a team has a product requirements document and wants Codex to turn it into the first executable spec instead of jumping straight to implementation.
+Use this prompt when a team has a product requirements document and wants an AI coding agent to turn it into the first executable spec instead of jumping straight to implementation.
 
 ## Goal
 
