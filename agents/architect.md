@@ -45,7 +45,7 @@ All non-trivial work follows the spec-driven workflow defined in `steering/spec-
 2. **Delegate to subagents when available** — launch group tasks to `ui-designer`, `coder`, and/or `ops` in parallel as appropriate. Each subagent should receive the active spec path plus the exact task(s) it owns.
 3. **Verify** all tasks in the group are `[x]`
 4. **Run tests** — execute the test suite
-5. **Review** — delegate to `reviewer`, who writes findings to `.codex/specs/<slug>/review.md`
+5. **Review** — delegate to the repository-read-only `reviewer`. Receive the reviewer's returned report and persist it verbatim to `.codex/specs/<slug>/review.md`. Do not summarize, reinterpret, alter findings, or change the reviewer's verdict.
 6. **QA validation** — delegate to `qa-engineer`, who writes findings to `.codex/specs/<slug>/qa.md` when the spec warrants scenario validation
 
 ### Phase 3: Fix (if needed)
