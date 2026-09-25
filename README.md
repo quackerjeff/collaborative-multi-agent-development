@@ -1,10 +1,17 @@
-# Codex Multi-Agent Development Sample
+# Multi-Agent Development Framework
 
-A sample repository for multi-agent development workflows with Codex. It provides a spec-driven process, role-based delegation, and supporting repository guidance for teams that want a structured AI-assisted development workflow.
+A structured, role-based framework for AI-assisted software development.
 
-The main entry point is [AGENTS.md](AGENTS.md). It tells Codex how to run the workflow, where to store specs, which role cards to use, and which steering docs to follow.
+The framework defines a spec-driven development process, specialized agent roles,
+handoff boundaries, reusable workflow prompts, repository guidance, and guardrails.
+These workflow concepts are independent of any particular model or agent harness.
 
-This repository is an example, not a default you should copy unchanged. Review the role prompts, steering rules, and guardrails before using them in a real project.
+Codex is a first-class supported harness. `AGENTS.md` remains the Codex-native
+entry point and tells Codex how to run the workflow, where to store specs, which
+role cards to use, and which steering documents to follow.
+
+Other agent harnesses may use the same role definitions, specifications, steering
+rules, prompts, skills, and guardrails through harness-specific integration.
 
 ## Overview
 
