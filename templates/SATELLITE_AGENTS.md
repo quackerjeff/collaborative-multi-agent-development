@@ -1,6 +1,6 @@
 # Service AI Workflow
 
-Use the shared Codex Multi-Agent Development (CMD) framework as the base workflow standard for this repository.
+Use the shared Collaborative Multi-Agent Development (CMD) framework as the base workflow standard for this repository.
 
 ## Canonical Shared CMD Source
 

@@ -1,6 +1,6 @@
 # Repository Topology Guide
 
-This document explains how to choose between a monorepo and multiple repositories when using Codex Multi-Agent Development (CMD), and how to keep AI workflow guidance aligned across a multi-repo system.
+This document explains how to choose between a monorepo and multiple repositories when using Collaborative Multi-Agent Development (CMD), and how to keep AI workflow guidance aligned across a multi-repo system.
 
 ## Recommendation Summary
 

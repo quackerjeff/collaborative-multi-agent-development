@@ -7,7 +7,7 @@ Usage:
   seed-repo.sh --type <ui|api|worker|data|fullstack|platform> [--dest <directory>] [--no-git-init] <project-name>
 
 Environment:
-  CMD_LOCATION   Path to the canonical Codex Multi-Agent Development repository.
+  CMD_LOCATION   Path to the canonical Collaborative Multi-Agent Development repository.
 USAGE
 }
 

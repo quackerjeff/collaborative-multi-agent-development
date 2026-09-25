@@ -1,6 +1,6 @@
 # Repository Bootstrapping
 
-Use `scripts/seed-repo.sh` on macOS/Linux or `scripts/seed-repo.ps1` on Windows to create a new service repository from Codex Multi-Agent Development (CMD).
+Use `scripts/seed-repo.sh` on macOS/Linux or `scripts/seed-repo.ps1` on Windows to create a new service repository from Collaborative Multi-Agent Development (CMD).
 
 ## Requirements
 
