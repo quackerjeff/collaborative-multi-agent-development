@@ -156,7 +156,7 @@ The files in `prompts/` are reusable workflow definitions:
 | `diagnose.md` | Test-first bug fixing from `issues/` reports |
 | `flywheel.md` | Review correction patterns and improve repo guidance |
 
-Treat these as prompt templates: paste them into the session or tell Codex to follow a specific file.
+Treat these as prompt templates: paste them into the session or tell the agent to follow a specific file.
 
 ## Skills
 
@@ -164,7 +164,7 @@ The `skills/` directory is copied over unchanged because it is already agent-agn
 
 ## UI Design
 
-UI design is treated as a first-class role in this Codex sample. Use [agents/ui-designer.md](agents/ui-designer.md) together with [steering/frontend-design.md](steering/frontend-design.md) when a spec changes user-facing screens, flows, or component behavior.
+UI design is treated as a first-class role in this framework. Use [agents/ui-designer.md](agents/ui-designer.md) together with [steering/frontend-design.md](steering/frontend-design.md) when a spec changes user-facing screens, flows, or component behavior.
 
 ## Quality Engineering
 

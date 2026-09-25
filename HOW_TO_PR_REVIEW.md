@@ -1,6 +1,6 @@
 # How To Review A GitHub PR With This Framework
 
-Use this guide from inside the repository that owns the pull request you need to review. The PR can be in GitHub; the local Codex session should run in the target project checkout.
+Use this guide from inside the repository that owns the pull request you need to review. The PR can be in GitHub; the local agent session should run in the target project checkout.
 
 This process is intentionally step-gated. Do not move to the next step until the current step has completed and the human reviewer says to continue.
 
@@ -17,7 +17,7 @@ General code review is not a substitute for security review or QA validation.
 
 ## Step 1: Orient The Target Repo Session
 
-Prompt the Codex session inside the target repository:
+Prompt the agent session inside the target repository:
 
 ```text
 We need to review GitHub PR <PR URL or number> using the repo's AGENTS.md framework.
@@ -302,7 +302,7 @@ Stop here until Step 7 is confirmed complete.
 
 ## Step 8: Choose Local Fixes Or Author Feedback
 
-If Codex should implement fixes locally, prompt:
+If the agent should implement fixes locally, prompt:
 
 ```text
 Step 8: Implement the review fixes locally.

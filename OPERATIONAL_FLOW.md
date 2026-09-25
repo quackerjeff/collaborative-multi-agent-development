@@ -3,7 +3,7 @@
 ## Starting Workflow
 
 1. Prepare the inputs.
-   Give Codex:
+   Give the agent:
    - the PRD
    - any wireframes or mockups
    - technical constraints
@@ -17,7 +17,7 @@
    Read AGENTS.md and this PRD. Use prompts/scope.md to create the first implementation spec for the smallest end-to-end MVP slice. Extract goals, non-goals, user flows, constraints, open questions, technical risks, and missing acceptance criteria.
    ```
 
-3. Force Codex to define slice 1.
+3. Require the agent to define slice 1.
    The first spec should be one thin vertical slice, not the whole product. For example:
    - auth only
    - task creation only
@@ -25,7 +25,7 @@
    - one billing flow only
 
 4. Resolve ambiguity before execution.
-   After the first scope pass, review what Codex flags:
+   After the first scope pass, review what the agent flags:
    - unclear product behavior
    - missing API contracts
    - missing edge cases
@@ -51,7 +51,7 @@
    - `steering/frontend-design.md` for the design planning rules
 
 6. Require technical research.
-   Before coding, Codex should verify:
+   Before coding, the agent should verify:
    - framework patterns
    - SDK usage
    - package versions
@@ -60,7 +60,7 @@
    Those findings should go into `docs/tech.md`.
 
 7. Approve the spec and task plan.
-   Codex should produce:
+   The agent should produce:
    - `spec.md`
    - `tasks.md`
    - `decisions.md`
@@ -74,9 +74,9 @@
    Use prompts/execute.md to execute the active spec to completion.
    ```
 
-## What Codex Should Produce From a PRD
+## What the Agent Should Produce From a PRD
 
-From the PRD, you want Codex to convert product language into delivery artifacts:
+From the PRD, you want the agent to convert product language into delivery artifacts:
 
 - Product summary
 - MVP slice proposal

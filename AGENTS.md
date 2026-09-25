@@ -1,7 +1,9 @@
 # Multi-Agent Development Framework
 
-This file is the repository-level entry point for AI coding agents using the
-Multi-Agent Development Framework.
+This file is the canonical repository-level entry point for AI coding agents
+using the Multi-Agent Development Framework. Harnesses that do not discover
+`AGENTS.md` automatically should be configured or prompted to read it before
+starting repository work.
 
 Use this repository as a spec-driven multi-agent workspace. The canonical role
 definitions live in `agents/`, and the canonical workflow policies live in

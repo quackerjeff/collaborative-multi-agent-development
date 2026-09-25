@@ -12,14 +12,14 @@ Use `scripts/seed-repo.sh` on macOS/Linux or `scripts/seed-repo.ps1` on Windows 
 macOS/Linux example:
 
 ```bash
-export CMD_LOCATION=~/Development/AI/codex-multiagent-development
+export CMD_LOCATION=~/Development/AI/collaborative-multi-agent-development
 $CMD_LOCATION/scripts/seed-repo.sh --type ui storefront-web
 ```
 
 Windows PowerShell example:
 
 ```powershell
-$env:CMD_LOCATION = "C:\Development\AI\codex-multiagent-development"
+$env:CMD_LOCATION = "C:\Development\AI\collaborative-multi-agent-development"
 & "$env:CMD_LOCATION\scripts\seed-repo.ps1" -Type ui -ProjectName storefront-web
 ```
 

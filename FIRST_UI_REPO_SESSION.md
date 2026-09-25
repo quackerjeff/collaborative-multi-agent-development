@@ -14,9 +14,9 @@ In the seeded repo:
 1. review `AGENTS.md`
 2. review `SYSTEM_CONTEXT.md`
 3. add any known framework, stack, contract, or environment facts to `docs/tech.md`
-4. start Codex in the repo root
+4. start your AI coding agent in the repo root
 
-The local `AGENTS.md` should already tell Codex to begin in the `architect` role and then use other roles as needed. In most cases, do not start by micromanaging the role. Start by describing the product outcome and the first slice.
+The local `AGENTS.md` should already tell the agent to begin in the `architect` role and then use other roles as needed. In most cases, do not start by micromanaging the role. Start by describing the product outcome and the first slice.
 
 ## Prompt 1: Scope The First Slice
 
@@ -34,7 +34,7 @@ Read AGENTS.md, SYSTEM_CONTEXT.md, and docs/tech.md. I want a UI for managing cu
 
 ## Prompt 2: Tighten Missing Decisions
 
-After reviewing the initial spec, answer open questions and ask Codex to revise it.
+After reviewing the initial spec, answer open questions and ask the agent to revise it.
 
 ```text
 Revise the active spec with these decisions: <list the answers to open questions, acceptance criteria updates, stack constraints, and any non-goals>.
@@ -98,7 +98,7 @@ Do not start with:
 
 ## When To Name Roles Explicitly
 
-You usually do not need to tell Codex which role to start with. The local `AGENTS.md` should handle that.
+You usually do not need to tell the agent which role to start with. The local `AGENTS.md` should handle that.
 
 Name a role explicitly when you want a focused pass such as:
 - `ui-designer` for flow, layout, and states
