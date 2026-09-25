@@ -264,7 +264,14 @@ Verdict is **FAIL** if any Critical or Warning findings exist, or tests are not 
 
 ## Security Review Format (`security-review.md`)
 
-The security reviewer writes findings here. The security review happens after the general review passes. Each cycle gets its own section.
+The security reviewer returns findings as read-only review output. The orchestrator
+persists that returned report verbatim to `security-review.md`.
+
+The orchestrator must not summarize, reinterpret, alter findings, or change the
+security reviewer's verdict when persisting the report.
+
+The security review happens after the general review passes. Each cycle gets its
+own section.
 
 ```markdown
 # Security Review: <Title>
@@ -424,7 +431,7 @@ RESOLVED | MITIGATED | WONT_FIX
 3. **Verify completion** — confirm all tasks in the group are `[x]`
 4. **Run tests** — execute the test suite, confirm all tests pass
 5. **Review (mandatory gate)** — delegate to the repository-read-only `reviewer`. The reviewer returns its review report as output. The orchestrator persists that report verbatim to `review.md`. Do NOT proceed to the next group until the review verdict is PASS. This step is not optional — skipping review is a workflow violation.
-6. **Security review (mandatory gate)** — after the general review passes, delegate to `security-reviewer`, who writes findings to `security-review.md`. Do NOT proceed until both reviews pass.
+6. **Security review (mandatory gate)** — after the general review passes, delegate to the repository-read-only `security-reviewer`. The security reviewer returns its review report as output. The orchestrator persists that report verbatim to `security-review.md`. Do NOT proceed until both reviews pass.
 
 > ⚠️ **ANTI-PATTERN — DO NOT PARALLELIZE REVIEW GATES**
 >
