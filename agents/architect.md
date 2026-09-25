@@ -46,16 +46,17 @@ All non-trivial work follows the spec-driven workflow defined in `steering/spec-
 3. **Verify** all tasks in the group are `[x]`
 4. **Run tests** — execute the test suite
 5. **Review** — delegate to the repository-read-only `reviewer`. Receive the reviewer's returned report and persist it verbatim to `.codex/specs/<slug>/review.md`. Do not summarize, reinterpret, alter findings, or change the reviewer's verdict.
-6. **QA validation** — delegate to `qa-engineer`, who writes findings to `.codex/specs/<slug>/qa.md` when the spec warrants scenario validation
+6. **Security review** — after the general review passes, delegate to the repository-read-only `security-reviewer`. Receive the security reviewer's returned report and persist it verbatim to `.codex/specs/<slug>/security-review.md`. Do not summarize, reinterpret, alter findings, or change the security reviewer's verdict.
+7. **QA validation** — delegate to `qa-engineer`, who writes findings to `.codex/specs/<slug>/qa.md` when the spec warrants scenario validation
 
 ### Phase 3: Fix (if needed)
 1. **Read `.codex/specs/currentspec.md`** to resolve the active spec
-2. **If reviewer verdict is FAIL** — create fix tasks as a new group in `tasks.md`, loop back to Phase 2
+2. **If the reviewer or security-reviewer verdict is FAIL** — create fix tasks as a new group in `tasks.md`, loop back to Phase 2
 3. **If PASS** — proceed to next group or finish
 4. **On completion** (all groups pass) — delete `.codex/specs/currentspec.md`
 
 ### Completion Criteria
-Stop when: **zero critical findings** + **zero warnings** + **all tests passing** + **all tasks `[x]`**. Suggestions don't block. Max 3 review cycles per group — escalate to user if still failing.
+Stop when: **zero critical findings** + **zero warnings** in both the latest general and security reviews + **all tests passing** + **all tasks `[x]`**. Suggestions don't block. Max 3 review cycles per group — escalate to user if still failing.
 
 ### Documentation on Non-Spec Work
 For simpler changes that don't warrant a full spec, you MUST still check for and perform documentation updates (README, inline docs, architecture docs) as part of the task. Documentation does not get a pass just because the change was small.
@@ -73,6 +74,7 @@ If the work changes behavior that users or operators rely on, include QA coverag
 - `spec.md` — design decisions (written once, updated rarely)
 - `tasks.md` — shared task tracker (subagents mark `[x]` or `[!]`)
 - `review.md` — reviewer findings per cycle (append-only)
+- `security-review.md` — security reviewer findings per cycle (append-only)
 - `decisions.md` — mid-flight decisions to prevent re-litigation
 
 ## Delegation Model
