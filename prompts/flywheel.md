@@ -6,10 +6,10 @@ Analyze recent sessions to identify patterns where the user had to correct, redi
 
 ### Phase 1: Session Analysis
 
-1. **Start with the corrections log** at `~/.codex/flywheel-corrections.jsonl` — this is the high-signal, pre-filtered list of user prompts that match correction patterns (terse responses, redirections, "no, I meant...", "instead of...", quality complaints, etc.). Each entry includes the user prompt, timestamp, cwd, and the `signals` that matched. Read this first to identify which sessions are worth deep-diving into.
-2. For context on what the agent did *before* each correction, cross-reference the turn index at `~/.codex/flywheel-log.jsonl` — entries near the same timestamp/cwd show the assistant response that preceded the user correction.
-3. Read session metadata and event logs under `~/.codex/sessions/`, sorted by recency, to map timestamps + cwds back to sessions.
-4. For sessions identified from the corrections log (or up to 10 most recent if no corrections logged), read the `.jsonl` conversation log for full context.
+1. **Identify the best correction-evidence source available from the active agent harness.** Prefer structured correction logs, turn indexes, and session/event logs when the harness exposes them. Do not assume a particular harness or filesystem layout.
+2. If structured correction signals are available, start with those to identify which sessions are worth deep-diving into. Otherwise, inspect recent session or conversation history directly for user corrections, redirects, repeated instructions, cancellations, and tool failures.
+3. Cross-reference available turn/session context to determine what the agent did immediately before each correction. Use timestamps, working-directory metadata, session identifiers, or equivalent harness-provided metadata when available.
+4. Read the full conversation context for sessions containing likely correction events (or up to 10 recent sessions when no pre-filtered correction evidence is available).
 5. Identify **correction events** — user messages that indicate the agent did something wrong or suboptimal:
    - Explicit corrections: "no, I meant...", "that's wrong", "don't do that", "try again but..."
    - Redirections: "instead, do...", "I said X not Y", "stop", "cancel that"
@@ -84,9 +84,11 @@ After presenting the report:
 4. For modified changes: incorporate feedback and re-present
 5. Summarize all changes made at the end
 
-## Session Data Format
+## Codex Evidence Adapter
 
-### Corrections Log (preferred starting point)
+When running under Codex with the provided flywheel guardrail helpers, use the following evidence sources. Other harnesses should use their equivalent structured telemetry or conversation/session history as described in Phase 1.
+
+### Corrections Log (preferred Codex starting point)
 
 The `flywheel-correction.sh` helper writes filtered correction-signal prompts to `~/.codex/flywheel-corrections.jsonl`:
 
@@ -103,7 +105,7 @@ Each entry represents a user prompt that matched at least one correction pattern
 - `terse` — prompt shorter than 60 characters (often a one-word correction)
 - `short_question` — terse prompt ending in "?"
 
-This log is THE primary source for finding correction events — start here.
+When this Codex helper is installed and producing data, this log is the preferred starting point for finding correction events.
 
 ### Turn Index Log (for context)
 
