@@ -96,7 +96,7 @@ if (Test-Path -Path $TargetDir) {
 
 New-Item -ItemType Directory -Path (Join-Path $TargetDir ".cmd/specs") -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $TargetDir "docs") -Force | Out-Null
-Set-Content -Path (Join-Path $TargetDir ".cmd/specs/currentspec.md") -Value ""
+New-Item -ItemType File -Path (Join-Path $TargetDir ".cmd/specs/.gitkeep") -Force | Out-Null
 
 Copy-ProfileAssets
 
