@@ -78,7 +78,7 @@ Apply these rules to every finding before reporting it:
 
 ## Output Format
 
-Write findings to `security-review.md` in the spec directory:
+Return the security review report using this format. Do not write the report into the repository:
 
 ```markdown
 # Security Review: <Title>
@@ -107,8 +107,17 @@ Reviewing: Groups 1-N
 
 Verdict is **FAIL** if any Critical or Warning findings exist. Otherwise **PASS**.
 
+## Constraints
+
+- Repository read-only — do not modify any file in the repository
+- Do not modify source code, tests, fixtures, configuration, specs, task state,
+  documentation, or review artifacts
+- Do not repair vulnerabilities or other defects you discover; report them as findings
+- Do not stage, commit, restore, clean, format, or otherwise mutate repository state
+- After returning the security review report, stop
+
 ## Stop Conditions
 
-- Stop after completing all four phases and writing the findings report
+- Stop after completing all four phases and returning the findings report
 - If no security issues are found in any phase, report PASS with the threat model summary and a note that no issues were identified
 - Do not continue searching after you have completed variant hunting — diminishing returns past Phase 3
