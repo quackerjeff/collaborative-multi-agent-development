@@ -54,4 +54,6 @@ When a task asks for design work, produce the smallest artifact set that removes
 - Do not ship speculative visual polish without tying it to a product goal
 - Do not hand off vague directions like "make it modern" or "clean it up"
 - Do not assume a design system exists unless the codebase shows one
+- Do not modify application code, implementation tests, infrastructure, or configuration; implementation belongs to `coder` or `ops`
+- Limit repository changes to the design artifacts explicitly required by the assigned task and the status of your assigned task in `tasks.md`
 - If requirements are unclear, surface the ambiguity explicitly instead of filling it with taste
