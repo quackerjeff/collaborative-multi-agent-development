@@ -4,7 +4,7 @@
 
 - Initial release of the Codex multi-agent sample
 - Added `AGENTS.md` and markdown role cards
-- Established spec state conventions under `.codex/specs/`
+- Established spec state conventions, now maintained under `.cmd/specs/`
 - Added standalone guardrail scripts for wrappers, git hooks, or CI
 
 ## 0.2.0
