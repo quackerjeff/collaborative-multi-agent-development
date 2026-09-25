@@ -56,7 +56,7 @@ All non-trivial work follows the spec-driven workflow defined in `steering/spec-
 4. **On completion** (all groups pass) — delete `.cmd/specs/currentspec.md`
 
 ### Completion Criteria
-Stop when: **zero critical findings** + **zero warnings** in both the latest general and security reviews + **all tests passing** + **all tasks `[x]`**. Suggestions don't block. Max 3 review cycles per group — escalate to user if still failing.
+Stop when: **zero critical findings** + **zero warnings** in both the latest general and security reviews + **all tests passing** + **all tasks `[x]`** + **any required QA gate has passed**. Suggestions don't block. Max 3 review cycles per group — escalate to user if still failing.
 
 ### Documentation on Non-Spec Work
 For simpler changes that don't warrant a full spec, you MUST still check for and perform documentation updates (README, inline docs, architecture docs) as part of the task. Documentation does not get a pass just because the change was small.

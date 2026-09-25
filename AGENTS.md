@@ -43,14 +43,14 @@ Use the other role cards in `agents/` when delegating or switching modes:
 3. Break work into ordered groups in `tasks.md`.
 4. If subagents are available, delegate independent implementation tasks in parallel using the role cards above.
 5. For meaningful user-facing work, plan explicit UI design tasks before or alongside implementation.
-6. Run review, then security review where needed, then QA validation, before documentation.
+6. Run review, then security review. Run QA validation when required by `steering/quality-engineering.md`, before documentation.
 7. Finish by updating docs and clearing `.cmd/specs/currentspec.md`.
 
 ## Rules
 
 - Do not guess SDK or framework APIs. Verify them first and write confirmed patterns to `docs/tech.md`.
 - Do not leave user-facing behavior underspecified. Use `ui-designer` tasks to define flows, states, and accessibility expectations.
-- Do not treat passing unit tests as sufficient evidence for non-trivial changes. Use `qa-engineer` tasks to capture scenario validation and release confidence.
+- Do not treat passing unit tests as sufficient evidence when work requires scenario validation. Add `qa-engineer` tasks when required by `steering/quality-engineering.md`; otherwise make the decision to omit a separate QA task explicit in the spec.
 - Treat `steering/*.md` as mandatory repo policy.
 - Treat `skills/**/SKILL.md` as reusable reference material.
 - Use `prompts/*.md` as workflow templates when the user asks to scope, execute, diagnose, or run the flywheel.

@@ -432,11 +432,12 @@ RESOLVED | MITIGATED | WONT_FIX
 4. **Run tests** — execute the test suite, confirm all tests pass
 5. **Review (mandatory gate)** — delegate to the repository-read-only `reviewer`. The reviewer returns its review report as output. The orchestrator persists that report verbatim to `review.md`. Do NOT proceed to the next group until the review verdict is PASS. This step is not optional — skipping review is a workflow violation.
 6. **Security review (mandatory gate)** — after the general review passes, delegate to the repository-read-only `security-reviewer`. The security reviewer returns its review report as output. The orchestrator persists that report verbatim to `security-review.md`. Do NOT proceed until both reviews pass.
+7. **QA validation (conditional gate)** — determine whether dedicated QA is required using `steering/quality-engineering.md`. When required, delegate to `qa-engineer` and persist findings to `qa.md`; QA must pass before the spec is complete. When a separate QA task is not required, record that decision explicitly in the spec.
 
 > ⚠️ **ANTI-PATTERN — DO NOT PARALLELIZE REVIEW GATES**
 >
-> Review (step 5), security review (step 6), and documentation are SEQUENTIAL gates, not parallel tasks.
-> The correct order is: review → wait for PASS → security review → wait for PASS → next group.
+> Review (step 5), security review (step 6), and documentation are SEQUENTIAL gates, not parallel tasks. When QA is required, it must also complete before documentation.
+> The required review order is: review → wait for PASS → security review → wait for PASS. Required QA then runs according to `steering/quality-engineering.md`.
 > NEVER launch review, security-review, and documentation subagents simultaneously.
 > This is the most common workflow violation. Speed does not justify skipping gates.
 
