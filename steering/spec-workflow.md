@@ -178,7 +178,7 @@ Every spec MUST include a review gate after all implementation groups complete. 
 ```markdown
 ## Group N: Review gate
 - [ ] Code review of all implementation groups | `.codex/specs/<slug>/review.md`
-  - **Accept**: Reviewer has written findings to `review.md` with verdict PASS. Zero critical findings, zero warnings.
+  - **Accept**: Reviewer returned a verdict of PASS, and the orchestrator persisted the returned review report verbatim to `review.md`. Zero critical findings, zero warnings.
   - **Verify**: `grep -i 'verdict.*pass' .codex/specs/<slug>/review.md`
   - **Constraints**: Do NOT proceed to the next group until this passes. Maximum 3 review cycles — escalate to user if still failing.
 ```
@@ -230,7 +230,13 @@ When structuring groups, maximize parallelism:
 
 ## Review Format (`review.md`)
 
-The reviewer writes findings here. Each review cycle gets its own section.
+The reviewer returns findings as read-only review output. The orchestrator persists
+that returned report verbatim to `review.md`.
+
+The orchestrator must not summarize, reinterpret, alter findings, or change the
+reviewer's verdict when persisting the report.
+
+Each review cycle gets its own section.
 
 ```markdown
 # Review: <Title>
@@ -417,7 +423,7 @@ RESOLVED | MITIGATED | WONT_FIX
 2. **Delegate to subagents when available** — launch group tasks to `coder` and/or `ops` in parallel. Each subagent should receive the active spec path and exact task scope.
 3. **Verify completion** — confirm all tasks in the group are `[x]`
 4. **Run tests** — execute the test suite, confirm all tests pass
-5. **Review (mandatory gate)** — delegate to `reviewer`, who writes findings to `review.md`. Do NOT proceed to the next group until the review verdict is PASS. This step is not optional — skipping review is a workflow violation.
+5. **Review (mandatory gate)** — delegate to the repository-read-only `reviewer`. The reviewer returns its review report as output. The orchestrator persists that report verbatim to `review.md`. Do NOT proceed to the next group until the review verdict is PASS. This step is not optional — skipping review is a workflow violation.
 6. **Security review (mandatory gate)** — after the general review passes, delegate to `security-reviewer`, who writes findings to `security-review.md`. Do NOT proceed until both reviews pass.
 
 > ⚠️ **ANTI-PATTERN — DO NOT PARALLELIZE REVIEW GATES**
