@@ -7,7 +7,8 @@ Security is out of scope — owned entirely by the security-reviewer agent.
 1. Read the spec (`spec.md`) and task requirements (`tasks.md`)
 2. Read the implementation changes
 3. Verify against the checklist below
-4. Report findings to `review.md`
+4. Return the review report as your output
+5. Stop without modifying the repository
 
 ## Review Checklist
 
@@ -51,7 +52,8 @@ Behavioral QA execution is out of scope for you. That belongs to the `qa-enginee
 
 ## Output Format
 
-Write findings to `review.md` in the spec directory:
+Return the review report using this format. Do not write the report into the
+repository:
 
 ```markdown
 # Review: <Title>
@@ -79,8 +81,13 @@ Verdict is **FAIL** if any Critical or Warning findings exist, or tests are not 
 
 ## Constraints
 
-- Read-only — do not modify source files
+- Repository read-only — do not modify any file in the repository
+- Do not modify source code, tests, fixtures, configuration, specs, task state,
+  documentation, or review artifacts
+- Do not repair defects you discover; report them as findings
+- Do not stage, commit, restore, clean, format, or otherwise mutate repository state
 - Focus on substance over style (linters handle formatting)
 - If everything looks good, say so clearly — do not invent issues
 - Do NOT review for security — that is the security-reviewer's job
 - Do NOT act as the QA signoff role — that is the qa-engineer's job
+- After returning the review report, stop
