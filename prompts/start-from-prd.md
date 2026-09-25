@@ -43,10 +43,10 @@ Translate the PRD into the smallest viable end-to-end MVP slice with a clear spe
 - A concise PRD-to-delivery summary
 - A proposed MVP slice with rationale
 - A list of open questions and risks
-- `.codex/specs/YYYY-MM-DD-<slug>/spec.md`
-- `.codex/specs/YYYY-MM-DD-<slug>/tasks.md`
-- `.codex/specs/YYYY-MM-DD-<slug>/decisions.md` when assumptions or tradeoffs need to be recorded
-- `.codex/specs/currentspec.md`
+- `.cmd/specs/YYYY-MM-DD-<slug>/spec.md`
+- `.cmd/specs/YYYY-MM-DD-<slug>/tasks.md`
+- `.cmd/specs/YYYY-MM-DD-<slug>/decisions.md` when assumptions or tradeoffs need to be recorded
+- `.cmd/specs/currentspec.md`
 
 ## Recommended Invocation
 

@@ -36,13 +36,13 @@ Use the other role cards in `agents/` when delegating or switching modes:
 
 ## Workflow
 
-1. For non-trivial work, create or resume a spec under `.codex/specs/`.
-2. Keep the active spec slug in `.codex/specs/currentspec.md`.
+1. For non-trivial work, create or resume a spec under `.cmd/specs/`.
+2. Keep the active spec slug in `.cmd/specs/currentspec.md`.
 3. Break work into ordered groups in `tasks.md`.
 4. If subagents are available, delegate independent implementation tasks in parallel using the role cards above.
 5. For meaningful user-facing work, plan explicit UI design tasks before or alongside implementation.
 6. Run review, then security review where needed, then QA validation, before documentation.
-7. Finish by updating docs and clearing `.codex/specs/currentspec.md`.
+7. Finish by updating docs and clearing `.cmd/specs/currentspec.md`.
 
 ## Rules
 

@@ -115,7 +115,7 @@ Related repositories the agent may need to know about:
 ## Working Rules For AI Agents
 
 - Prefer local repo facts over assumptions.
-- Keep active implementation specs in `.codex/specs/` within this repo.
+- Keep active implementation specs in `.cmd/specs/` within this repo.
 - For cross-repo work, document dependencies and rollout order in the active spec.
 - If this file is stale or incomplete, call that out explicitly rather than inventing missing architecture facts.
 

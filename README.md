@@ -34,7 +34,7 @@ Typical flow:
 architect -> ui-designer + coder + ops -> reviewer -> security-reviewer + qa-engineer -> docs -> architect
 ```
 
-When Codex subagents are available in your environment, the architect should delegate parallel work using the role cards in `agents/`. When subagents are not available, Codex can still follow the same workflow sequentially.
+When the active harness supports subagents, the architect should delegate parallel work using the role cards in `agents/`. When subagents are unavailable, the same roles can be executed sequentially while preserving their responsibilities, boundaries, review gates, and stop conditions.
 
 For product-surface work, `ui-designer` should usually participate before code is finalized so `coder` is implementing a defined interaction rather than inventing one. For non-trivial delivery work, `qa-engineer` should validate behavior after implementation instead of treating code review alone as the release gate.
 
@@ -46,7 +46,7 @@ This sample uses a few simple conventions:
 |---------|------------|
 | Repository instructions | `AGENTS.md` |
 | Role definitions | Markdown role cards in `agents/` |
-| Active spec work | `.codex/specs/...` |
+| Active spec work | `.cmd/specs/...` |
 | Reusable workflows | Prompt templates in `prompts/` |
 | Policy enforcement helpers | Guardrail scripts in `scripts/guardrails/` |
 
@@ -62,20 +62,20 @@ For a step-gated GitHub pull request review workflow, see [HOW_TO_PR_REVIEW.md](
 
 ## Quick Start
 
-1. Put this directory at the root of the project you want Codex to work on, or copy its contents into an existing repository.
+1. Put this directory at the root of the project you want an AI coding agent to work on, or copy its contents into an existing repository.
 2. Make the guardrail scripts executable:
 
 ```bash
 chmod +x scripts/guardrails/*.sh
 ```
 
-3. Start Codex in the repository root:
+3. Start your AI coding agent in the repository root. For Codex:
 
 ```bash
 codex
 ```
 
-4. Ask Codex to read [AGENTS.md](AGENTS.md) and begin with one of the workflow prompts in `prompts/`.
+4. Ask the agent to read [AGENTS.md](AGENTS.md) and begin with one of the workflow prompts in `prompts/`.
 
 Example:
 
@@ -86,9 +86,9 @@ Read AGENTS.md, then use prompts/scope.md to open a new spec for ...
 ## Repository Structure
 
 ```text
-├── AGENTS.md                # Codex repository instructions and orchestration rules
+├── AGENTS.md                # Repository instructions and orchestration rules
 ├── agents/                  # Role cards for architect, ui-designer, coder, reviewer, qa-engineer, ops, docs
-├── prompts/                 # Reusable workflow prompts to paste into Codex
+├── prompts/                 # Reusable workflow prompts for agent sessions
 ├── steering/                # Global behavioral rules referenced by AGENTS.md
 ├── skills/                  # Agent-agnostic domain knowledge files
 ├── scripts/guardrails/      # Standalone guardrail utilities for wrappers/CI/git hooks
@@ -110,11 +110,11 @@ Read AGENTS.md, then use prompts/scope.md to open a new spec for ...
 
 ## Specs and Issues
 
-Specs live under `.codex/specs/`:
+Specs live under `.cmd/specs/`:
 
 ```text
-.codex/specs/currentspec.md
-.codex/specs/YYYY-MM-DD-<slug>/
+.cmd/specs/currentspec.md
+.cmd/specs/YYYY-MM-DD-<slug>/
   spec.md
   tasks.md
   review.md
@@ -123,7 +123,7 @@ Specs live under `.codex/specs/`:
   decisions.md
 ```
 
-This repository includes a complete example spec at [`.codex/specs/2026-07-12-account-settings-refresh/`](.codex/specs/2026-07-12-account-settings-refresh/) showing how `ui-designer`, `coder`, `reviewer`, `security-reviewer`, `qa-engineer`, and `docs` fit together in one realistic feature workflow.
+This repository includes a complete example spec at [`.cmd/specs/2026-07-12-account-settings-refresh/`](.cmd/specs/2026-07-12-account-settings-refresh/) showing how `ui-designer`, `coder`, `reviewer`, `security-reviewer`, `qa-engineer`, and `docs` fit together in one realistic feature workflow.
 
 Issue investigation folders live at:
 
@@ -139,7 +139,7 @@ The guardrails are provided as standalone scripts rather than assuming a specifi
 
 Use them in one of three ways:
 
-1. From a thin local wrapper around `codex`
+1. From a harness wrapper or hook mechanism
 2. From git hooks or pre-commit checks
 3. From CI jobs that validate generated changes
 

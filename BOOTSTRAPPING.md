@@ -45,7 +45,7 @@ The bootstrap script:
 1. creates the target directory
 2. copies shared CMD assets listed in the manifests for the selected repo type
 3. renders local bootstrap files such as `AGENTS.md`, `SYSTEM_CONTEXT.md`, `README.md`, `docs/tech.md`, and `.gitignore`
-4. creates `.codex/specs/`
+4. creates `.cmd/specs/`
 5. initializes a git repository unless `--no-git-init` is passed
 
 ## Usage
@@ -102,7 +102,7 @@ The script points `AGENTS.md` back to the canonical CMD source using `CMD_LOCATI
 1. Replace placeholders in `AGENTS.md` and `SYSTEM_CONTEXT.md`.
 2. Add repo-specific runtime, contract, and environment notes in `docs/tech.md`.
 3. Review the copied `agents/`, `steering/`, and `prompts/` files and remove anything that truly does not fit the repo.
-4. Start the first scoped spec under `.codex/specs/`.
+4. Start the first scoped spec under `.cmd/specs/`.
 
 For a concrete walkthrough of the first session in a seeded `ui` repo, see [FIRST_UI_REPO_SESSION.md](FIRST_UI_REPO_SESSION.md).
 For a concrete walkthrough of the first session in a seeded `api` repo, see [FIRST_API_REPO_SESSION.md](FIRST_API_REPO_SESSION.md).

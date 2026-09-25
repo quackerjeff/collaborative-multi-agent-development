@@ -27,14 +27,14 @@ Before starting non-trivial work, read in this order:
 
 If a spec is already active, also read:
 
-5. `.codex/specs/currentspec.md`
+5. `.cmd/specs/currentspec.md`
 6. the active spec directory files
 
 ## Precedence
 
 When instructions conflict, use this order:
 
-1. active spec under `.codex/specs/...`
+1. active spec under `.cmd/specs/...`
 2. local `AGENTS.md`
 3. local `SYSTEM_CONTEXT.md`
 4. local `docs/tech.md`
@@ -60,14 +60,14 @@ This repository does not own:
 
 ## Default Workflow
 
-1. For non-trivial work, create or resume a spec under `.codex/specs/`.
-2. Keep the active spec slug in `.codex/specs/currentspec.md`.
+1. For non-trivial work, create or resume a spec under `.cmd/specs/`.
+2. Keep the active spec slug in `.cmd/specs/currentspec.md`.
 3. Break work into ordered groups in `tasks.md`.
 4. For meaningful user-facing work, define UI behavior before implementation is finalized.
 5. Verify SDK, framework, dependency, and integration usage before coding and record confirmed patterns in `docs/tech.md`.
 6. Execute implementation tasks.
 7. Run review, security review when needed, and QA validation before final documentation.
-8. Finish by updating docs and clearing `.codex/specs/currentspec.md`.
+8. Finish by updating docs and clearing `.cmd/specs/currentspec.md`.
 
 ## Local Rules
 

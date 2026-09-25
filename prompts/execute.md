@@ -1,7 +1,7 @@
 # Execute Current Spec
 
-Read `.codex/specs/currentspec.md` to resolve the active spec slug.
-Read the spec at `.codex/specs/<slug>/spec.md` and the task list at `.codex/specs/<slug>/tasks.md`.
+Read `.cmd/specs/currentspec.md` to resolve the active spec slug.
+Read the spec at `.cmd/specs/<slug>/spec.md` and the task list at `.cmd/specs/<slug>/tasks.md`.
 
 Execute all incomplete task groups in order. For each group:
 

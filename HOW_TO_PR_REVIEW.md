@@ -26,7 +26,7 @@ Do not start reviewing yet. First, orient yourself:
 1. Read AGENTS.md.
 2. Read SYSTEM_CONTEXT.md if present.
 3. Read the mandatory steering docs referenced by AGENTS.md.
-4. Identify whether there is an active spec in .codex/specs/currentspec.md.
+4. Identify whether there is an active spec in .cmd/specs/currentspec.md.
 5. Check the current git branch and clean/dirty worktree status.
 6. Report what framework instructions apply before taking any review action.
 ```
@@ -80,16 +80,16 @@ If an active spec already exists and clearly corresponds to this PR, reuse it.
 
 If no matching active spec exists, create a lightweight review spec:
 
-.codex/specs/YYYY-MM-DD-pr-<number>-review/spec.md
-.codex/specs/YYYY-MM-DD-pr-<number>-review/tasks.md
-.codex/specs/YYYY-MM-DD-pr-<number>-review/review.md
-.codex/specs/YYYY-MM-DD-pr-<number>-review/security-review.md
-.codex/specs/YYYY-MM-DD-pr-<number>-review/qa.md
-.codex/specs/YYYY-MM-DD-pr-<number>-review/decisions.md
+.cmd/specs/YYYY-MM-DD-pr-<number>-review/spec.md
+.cmd/specs/YYYY-MM-DD-pr-<number>-review/tasks.md
+.cmd/specs/YYYY-MM-DD-pr-<number>-review/review.md
+.cmd/specs/YYYY-MM-DD-pr-<number>-review/security-review.md
+.cmd/specs/YYYY-MM-DD-pr-<number>-review/qa.md
+.cmd/specs/YYYY-MM-DD-pr-<number>-review/decisions.md
 
 Then write the slug to:
 
-.codex/specs/currentspec.md
+.cmd/specs/currentspec.md
 
 The spec.md should include:
 - PR title and URL
@@ -113,7 +113,7 @@ Do not review the code yet. Only create or resume the spec and task plan.
 
 Expected result:
 
-- `.codex/specs/currentspec.md` points to the PR review spec.
+- `.cmd/specs/currentspec.md` points to the PR review spec.
 - `spec.md` describes the PR and review scope.
 - `tasks.md` has review, QA, and security gates as needed.
 - No code-review findings are produced yet.
@@ -127,7 +127,7 @@ Prompt:
 ```text
 Step 4: Align the local checkout for review.
 
-Read .codex/specs/currentspec.md, then read the active spec and tasks.
+Read .cmd/specs/currentspec.md, then read the active spec and tasks.
 
 Confirm:
 1. Current branch.
@@ -167,7 +167,7 @@ Prompt:
 ```text
 Step 5: Build the review baseline.
 
-Read .codex/specs/currentspec.md, then read the active spec and tasks.
+Read .cmd/specs/currentspec.md, then read the active spec and tasks.
 
 Determine the merge base between the PR branch and base branch.
 
@@ -209,7 +209,7 @@ Step 6: Run the general code review.
 Act as the reviewer role from agents/reviewer.md.
 
 Read:
-1. .codex/specs/currentspec.md
+1. .cmd/specs/currentspec.md
 2. the active spec.md
 3. the active tasks.md
 4. decisions.md, if present
@@ -234,7 +234,7 @@ Run the relevant test commands if they are known and reasonably available. If no
 
 Write findings to:
 
-.codex/specs/<active-slug>/review.md
+.cmd/specs/<active-slug>/review.md
 
 Use this verdict rule:
 - FAIL if any Critical or Warning findings exist
@@ -262,7 +262,7 @@ Prompt:
 Step 7: Triage the failed review.
 
 Read:
-1. .codex/specs/currentspec.md
+1. .cmd/specs/currentspec.md
 2. the active review.md
 3. the active spec.md
 4. the active tasks.md
@@ -307,7 +307,7 @@ If Codex should implement fixes locally, prompt:
 ```text
 Step 8: Implement the review fixes locally.
 
-Read .codex/specs/currentspec.md and the active tasks.md.
+Read .cmd/specs/currentspec.md and the active tasks.md.
 
 Implement only the Group N: Review fixes tasks.
 Do not address Suggestions unless they are explicitly included as fix tasks.
@@ -323,7 +323,7 @@ If feedback should go to the PR author instead, prompt:
 ```text
 Step 8: Prepare PR author feedback.
 
-Read .codex/specs/currentspec.md and the active review.md.
+Read .cmd/specs/currentspec.md and the active review.md.
 
 Draft concise GitHub review feedback grouped by:
 - blocking Critical findings
@@ -385,7 +385,7 @@ Prompt:
 ```text
 Step 10: Record the review outcome.
 
-Read .codex/specs/currentspec.md, then update the active spec files.
+Read .cmd/specs/currentspec.md, then update the active spec files.
 
 In review.md, append a short "GitHub Review Posted" note with:
 - date
@@ -400,7 +400,7 @@ In tasks.md:
 - leave review fix tasks unchecked if the PR author is expected to address them
 - add a note that fixes are pending from the PR author
 
-Do not clear .codex/specs/currentspec.md yet because the PR still has blocking review findings.
+Do not clear .cmd/specs/currentspec.md yet because the PR still has blocking review findings.
 ```
 
 Expected result:
@@ -418,7 +418,7 @@ Prompt:
 ```text
 Step 11: Pause the review workflow.
 
-Do not clear .codex/specs/currentspec.md.
+Do not clear .cmd/specs/currentspec.md.
 Do not continue to security review, QA, or documentation yet unless I explicitly ask.
 
 The current state is:
@@ -448,7 +448,7 @@ When the PR author pushes new commits or responds to review feedback:
 3. Re-run Step 5 against the new PR head.
 4. Re-run Step 6 as the next review cycle.
 5. If the general review passes, run security review and QA when the spec says they apply.
-6. When all required gates pass, update final documentation or review summary records and clear `.codex/specs/currentspec.md`.
+6. When all required gates pass, update final documentation or review summary records and clear `.cmd/specs/currentspec.md`.
 
 ## PASS Path
 
@@ -459,4 +459,4 @@ If Step 6 returns `PASS`:
 3. Post an `APPROVE` review only after all required gates pass.
 4. Record the posted review in `review.md`.
 5. Update final review documentation or summary records.
-6. Clear `.codex/specs/currentspec.md` only when the PR review workflow is complete.
+6. Clear `.cmd/specs/currentspec.md` only when the PR review workflow is complete.

@@ -11,8 +11,8 @@ Create a spec before any non-trivial work — if it touches multiple files, invo
 ## Directory Structure
 
 ```
-.codex/specs/currentspec.md  # Tracks current spec slug in use
-.codex/specs/YYYY-MM-DD-<slug>/
+.cmd/specs/currentspec.md  # Tracks current spec slug in use
+.cmd/specs/YYYY-MM-DD-<slug>/
   spec.md        # Design decisions, requirements, constraints
   tasks.md       # Parallelized task list for execution
   review.md      # Reviewer findings per cycle
@@ -177,9 +177,9 @@ Every spec MUST include a review gate after all implementation groups complete. 
 
 ```markdown
 ## Group N: Review gate
-- [ ] Code review of all implementation groups | `.codex/specs/<slug>/review.md`
+- [ ] Code review of all implementation groups | `.cmd/specs/<slug>/review.md`
   - **Accept**: Reviewer returned a verdict of PASS, and the orchestrator persisted the returned review report verbatim to `review.md`. Zero critical findings, zero warnings.
-  - **Verify**: `grep -i 'verdict.*pass' .codex/specs/<slug>/review.md`
+  - **Verify**: `grep -i 'verdict.*pass' .cmd/specs/<slug>/review.md`
   - **Constraints**: Do NOT proceed to the next group until this passes. Maximum 3 review cycles — escalate to user if still failing.
 ```
 
@@ -211,9 +211,9 @@ Most non-trivial specs should include a QA task after implementation and review.
 
 ```markdown
 ## Group N: QA gate
-- [ ] Validate implemented behavior and regression coverage | `.codex/specs/<slug>/qa.md`
+- [ ] Validate implemented behavior and regression coverage | `.cmd/specs/<slug>/qa.md`
   - **Accept**: QA report documents what was validated, major scenarios covered, residual gaps, release confidence, and a PASS/FAIL verdict
-  - **Verify**: `grep -i 'verdict.*pass\\|verdict.*fail' .codex/specs/<slug>/qa.md`
+  - **Verify**: `grep -i 'verdict.*pass\\|verdict.*fail' .cmd/specs/<slug>/qa.md`
   - **Constraints**: Do NOT mark complete if critical acceptance criteria remain unvalidated
 ```
 
@@ -422,11 +422,11 @@ RESOLVED | MITIGATED | WONT_FIX
 ### Phase 1: Plan
 1. **Research** — gather context, explore codebase, check docs
 2. **SDK/Framework research** — for each dependency, look up current API docs using AWS documentation search and Context7. Write verified patterns, import paths, and constructor signatures to the project's `docs/tech.md`
-3. **Spec** — write `spec.md` with decisions and design (reference `docs/tech.md` for API contracts), then write the slug to `.codex/specs/currentspec.md`
+3. **Spec** — write `spec.md` with decisions and design (reference `docs/tech.md` for API contracts), then write the slug to `.cmd/specs/currentspec.md`
 4. **Plan** — create `tasks.md` with parallelized groups
 
 ### Phase 2: Build (per group)
-1. **Read `.codex/specs/currentspec.md`** to resolve the active spec slug and path
+1. **Read `.cmd/specs/currentspec.md`** to resolve the active spec slug and path
 2. **Delegate to subagents when available** — launch group tasks to `coder` and/or `ops` in parallel. Each subagent should receive the active spec path and exact task scope.
 3. **Verify completion** — confirm all tasks in the group are `[x]`
 4. **Run tests** — execute the test suite, confirm all tests pass
@@ -441,11 +441,11 @@ RESOLVED | MITIGATED | WONT_FIX
 > This is the most common workflow violation. Speed does not justify skipping gates.
 
 ### Phase 3: Fix (if needed)
-1. **Read `.codex/specs/currentspec.md`** to resolve the active spec
+1. **Read `.cmd/specs/currentspec.md`** to resolve the active spec
 2. **Evaluate reviews** — read `review.md` and `security-review.md` for the current cycle
 3. **If FAIL** — create fix tasks as a new group in `tasks.md` (e.g., `## Fix Group 1: Address review cycle 1`), then go to step 1 of Phase 2
 4. **If PASS** — proceed to next group (back to Phase 2 step 1) or finish
-5. **On completion** (all groups pass) — delete `.codex/specs/currentspec.md`
+5. **On completion** (all groups pass) — delete `.cmd/specs/currentspec.md`
 
 ### Completion Criteria
 

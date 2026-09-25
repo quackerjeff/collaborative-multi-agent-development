@@ -111,7 +111,7 @@ Each service repository should still contain a minimal local CMD footprint.
 
 At minimum:
 - `AGENTS.md`
-- `.codex/specs/`
+- `.cmd/specs/`
 - `SYSTEM_CONTEXT.md`
 - `docs/tech.md`
 - optionally synced copies of `agents/`, `prompts/`, `steering/`, and `scripts/guardrails/`
@@ -190,7 +190,7 @@ Use this for confirmed patterns only:
 
 ### Local Spec Directory
 
-Keep `.codex/specs/` local to the repo.
+Keep `.cmd/specs/` local to the repo.
 
 Even in a multi-repo system, implementation specs should live beside the code being changed. Cross-repo work can reference companion specs in other repos, but do not centralize all active specs into one external repo.
 
@@ -252,7 +252,7 @@ For most multi-repo systems, use this standard:
 
 In a satellite repository, precedence should be:
 
-1. active spec under `.codex/specs/...`
+1. active spec under `.cmd/specs/...`
 2. local `AGENTS.md`
 3. local `SYSTEM_CONTEXT.md` and `docs/tech.md`
 4. copied or linked shared CMD assets

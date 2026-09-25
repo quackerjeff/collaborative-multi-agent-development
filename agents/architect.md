@@ -37,23 +37,23 @@ All non-trivial work follows the spec-driven workflow defined in `steering/spec-
 
 ### Phase 1: Plan
 1. **Research** the problem space
-2. **Write a spec** at `.codex/specs/<slug>/spec.md` — then write the slug to `.codex/specs/currentspec.md`
-3. **Create tasks** at `.codex/specs/<slug>/tasks.md` — organized into parallel groups
+2. **Write a spec** at `.cmd/specs/<slug>/spec.md` — then write the slug to `.cmd/specs/currentspec.md`
+3. **Create tasks** at `.cmd/specs/<slug>/tasks.md` — organized into parallel groups
 
 ### Phase 2: Build (per group)
-1. **Read `.codex/specs/currentspec.md`** to resolve the active spec slug and path
+1. **Read `.cmd/specs/currentspec.md`** to resolve the active spec slug and path
 2. **Delegate to subagents when available** — launch group tasks to `ui-designer`, `coder`, and/or `ops` in parallel as appropriate. Each subagent should receive the active spec path plus the exact task(s) it owns.
 3. **Verify** all tasks in the group are `[x]`
 4. **Run tests** — execute the test suite
-5. **Review** — delegate to the repository-read-only `reviewer`. Receive the reviewer's returned report and persist it verbatim to `.codex/specs/<slug>/review.md`. Do not summarize, reinterpret, alter findings, or change the reviewer's verdict.
-6. **Security review** — after the general review passes, delegate to the repository-read-only `security-reviewer`. Receive the security reviewer's returned report and persist it verbatim to `.codex/specs/<slug>/security-review.md`. Do not summarize, reinterpret, alter findings, or change the security reviewer's verdict.
-7. **QA validation** — delegate to `qa-engineer`, who writes findings to `.codex/specs/<slug>/qa.md` when the spec warrants scenario validation
+5. **Review** — delegate to the repository-read-only `reviewer`. Receive the reviewer's returned report and persist it verbatim to `.cmd/specs/<slug>/review.md`. Do not summarize, reinterpret, alter findings, or change the reviewer's verdict.
+6. **Security review** — after the general review passes, delegate to the repository-read-only `security-reviewer`. Receive the security reviewer's returned report and persist it verbatim to `.cmd/specs/<slug>/security-review.md`. Do not summarize, reinterpret, alter findings, or change the security reviewer's verdict.
+7. **QA validation** — delegate to `qa-engineer`, who writes findings to `.cmd/specs/<slug>/qa.md` when the spec warrants scenario validation
 
 ### Phase 3: Fix (if needed)
-1. **Read `.codex/specs/currentspec.md`** to resolve the active spec
+1. **Read `.cmd/specs/currentspec.md`** to resolve the active spec
 2. **If the reviewer or security-reviewer verdict is FAIL** — create fix tasks as a new group in `tasks.md`, loop back to Phase 2
 3. **If PASS** — proceed to next group or finish
-4. **On completion** (all groups pass) — delete `.codex/specs/currentspec.md`
+4. **On completion** (all groups pass) — delete `.cmd/specs/currentspec.md`
 
 ### Completion Criteria
 Stop when: **zero critical findings** + **zero warnings** in both the latest general and security reviews + **all tests passing** + **all tasks `[x]`**. Suggestions don't block. Max 3 review cycles per group — escalate to user if still failing.

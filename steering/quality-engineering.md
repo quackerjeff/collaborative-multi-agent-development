@@ -22,7 +22,7 @@ Small internal refactors with strong automated coverage may not need a separate 
 
 ## Required QA Output
 
-QA work should produce a validation record in `.codex/specs/<slug>/qa.md` that covers:
+QA work should produce a validation record in `.cmd/specs/<slug>/qa.md` that covers:
 
 - What was validated
 - Which checks were automated versus manual
@@ -56,8 +56,8 @@ Every QA task should specify:
 Example:
 
 ```markdown
-- [ ] Validate onboarding flow and regression coverage | `.codex/specs/<slug>/qa.md`
+- [ ] Validate onboarding flow and regression coverage | `.cmd/specs/<slug>/qa.md`
   - **Accept**: QA report documents happy path, validation errors, retry behavior, mobile layout, and automated test coverage for the onboarding flow
-  - **Verify**: `grep -i 'verdict.*pass\\|verdict.*fail' .codex/specs/<slug>/qa.md`
+  - **Verify**: `grep -i 'verdict.*pass\\|verdict.*fail' .cmd/specs/<slug>/qa.md`
   - **Constraints**: Do not mark complete if core acceptance criteria cannot be exercised in the available environment
 ```

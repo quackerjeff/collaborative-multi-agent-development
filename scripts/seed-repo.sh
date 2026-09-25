@@ -126,8 +126,8 @@ mkdir -p "$DEST_ROOT"
 TARGET_DIR="$DEST_ROOT/$PROJECT_NAME"
 [ ! -e "$TARGET_DIR" ] || fail "Target already exists: $TARGET_DIR"
 
-mkdir -p "$TARGET_DIR/.codex/specs" "$TARGET_DIR/docs"
-: > "$TARGET_DIR/.codex/specs/currentspec.md"
+mkdir -p "$TARGET_DIR/.cmd/specs" "$TARGET_DIR/docs"
+: > "$TARGET_DIR/.cmd/specs/currentspec.md"
 
 copy_profile_assets
 

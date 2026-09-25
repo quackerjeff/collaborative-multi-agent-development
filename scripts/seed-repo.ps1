@@ -94,9 +94,9 @@ if (Test-Path -Path $TargetDir) {
     Fail "Target already exists: $TargetDir"
 }
 
-New-Item -ItemType Directory -Path (Join-Path $TargetDir ".codex/specs") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $TargetDir ".cmd/specs") -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $TargetDir "docs") -Force | Out-Null
-Set-Content -Path (Join-Path $TargetDir ".codex/specs/currentspec.md") -Value ""
+Set-Content -Path (Join-Path $TargetDir ".cmd/specs/currentspec.md") -Value ""
 
 Copy-ProfileAssets
 
