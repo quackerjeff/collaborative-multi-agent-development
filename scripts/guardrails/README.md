@@ -2,15 +2,17 @@
 
 These scripts provide optional policy enforcement and logging helpers for this repository.
 
-Codex does not read a repo-local hook manifest here, so treat these as standalone utilities:
+Treat them as standalone utilities that can be integrated with the active agent harness or development workflow:
 
-- call them from a local wrapper around `codex`
+- call them from a harness wrapper or hook mechanism
 - wire them into git hooks
 - run them from CI before accepting generated changes
 
+Codex does not read a repo-local hook manifest here, so Codex users can call these scripts from a local wrapper around `codex`.
+
 ## Event Format
 
-Most scripts intentionally keep the original JSON-on-stdin contract so they can be called from a thin Codex wrapper or CI harness without much glue.
+Most scripts intentionally use a JSON-on-stdin contract so they can be called from harness wrappers, hook mechanisms, or CI without much glue.
 
 Typical payloads:
 
@@ -23,4 +25,4 @@ Typical payloads:
 
 `validate-environment.sh` is the exception: it can be run directly with no payload.
 
-The flywheel scripts are optional logging helpers. If you build a wrapper around Codex, point them at `~/.codex/`.
+The flywheel scripts are optional Codex logging helpers. They currently write Codex-specific telemetry under `~/.codex/`; other harnesses may provide their own equivalent evidence sources for the flywheel workflow.

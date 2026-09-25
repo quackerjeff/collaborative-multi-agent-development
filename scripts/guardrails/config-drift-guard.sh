@@ -1,13 +1,12 @@
 #!/bin/bash
-# Guardrail: Block writes to Codex workflow files unless explicitly approved.
+# Guardrail: Block writes to framework configuration files unless explicitly approved.
 # Exit 0 = allow, Exit 2 = block (returns STDERR to LLM)
 #
 # Protected paths: AGENTS.md, agents/, steering/, skills/, prompts/, scripts/guardrails/
-# To allow config writes, set CODEX_ALLOW_CONFIG_WRITES=1.
-
+# To allow config writes, set AGENT_ALLOW_CONFIG_WRITES=1.
 set -euo pipefail
 
-[ "${CODEX_ALLOW_CONFIG_WRITES:-}" = "1" ] && exit 0
+[ "${AGENT_ALLOW_CONFIG_WRITES:-}" = "1" ] && exit 0
 
 EVENT=$(cat)
 
@@ -41,7 +40,7 @@ for op in ops:
     resolved = os.path.realpath(os.path.expanduser(path))
     for protected in PROTECTED:
         if resolved.startswith(protected + os.sep) or resolved == protected:
-            print("BLOCKED: Writing to Codex workflow files requires explicit approval.", file=sys.stderr)
+            print("BLOCKED: Writing to framework configuration files requires explicit approval.", file=sys.stderr) 
             print(f"File: {resolved}", file=sys.stderr)
             print("Ask the user to approve this change before proceeding.", file=sys.stderr)
             sys.exit(2)
