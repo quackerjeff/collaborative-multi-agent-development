@@ -1,6 +1,17 @@
-# Codex Multi-Agent Workflow
+# Multi-Agent Development Framework
 
-Use this repository as a spec-driven multi-agent workspace.
+This file is the repository-level entry point for AI coding agents using the
+Multi-Agent Development Framework.
+
+Use this repository as a spec-driven multi-agent workspace. The canonical role
+definitions live in `agents/`, and the canonical workflow policies live in
+`steering/`. Agents must apply those shared definitions rather than inventing
+alternate role behavior.
+
+When the active harness supports subagents, instantiate the appropriate roles
+using the role cards in `agents/`. When subagents are unavailable, execute the
+same roles sequentially while preserving their responsibilities, boundaries,
+review gates, and stop conditions.
 
 ## Default Mode
 
