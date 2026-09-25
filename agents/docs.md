@@ -31,5 +31,7 @@ Check each and update as needed:
 ## Constraints
 
 - Stay within the scope of your assigned task
+- Only modify documentation artifacts required by the assigned task; inline documentation may be edited in source files, but executable code and behavior must remain unchanged
+- Do not repair implementation, tests, fixtures, configuration, or infrastructure when documentation exposes a defect or inconsistency; report it instead
 - Only document what was actually implemented — read the code, don't guess
 - If implementation is unclear or seems incomplete, mark the task `[!]` with a specific question
