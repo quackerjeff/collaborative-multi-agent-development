@@ -10,6 +10,11 @@ Codex is a first-class supported harness. `AGENTS.md` remains the Codex-native
 entry point and tells Codex how to run the workflow, where to store specs, which
 role cards to use, and which steering documents to follow.
 
+OpenCode is a first-class supported harness for this repository. OpenCode adapters
+in `integrations/opencode/agents/` route OpenCode subagents to CMD role definitions
+via YAML frontmatter configuration. See [docs/integration.md](docs/integration.md)
+for details.
+
 Other agent harnesses may use the same role definitions, specifications, steering
 rules, prompts, skills, and guardrails through harness-specific integration.
 
@@ -69,10 +74,18 @@ For a step-gated GitHub pull request review workflow, see [HOW_TO_PR_REVIEW.md](
 chmod +x scripts/guardrails/*.sh
 ```
 
-3. Start your AI coding agent in the repository root. For Codex:
+3. Start your AI coding agent in the repository root.
+
+For Codex:
 
 ```bash
 codex
+```
+
+For OpenCode (1.18.20+):
+
+```bash
+opencode
 ```
 
 4. Ask the agent to read [AGENTS.md](AGENTS.md) and begin with one of the workflow prompts in `prompts/`.
@@ -82,6 +95,24 @@ Example:
 ```text
 Read AGENTS.md, then use prompts/scope.md to open a new spec for ...
 ```
+
+## OpenCode Harness Integration
+
+OpenCode is a first-class supported harness for this repository. OpenCode adapters
+in `integrations/opencode/agents/` route OpenCode subagents to CMD role definitions
+via YAML frontmatter configuration.
+
+**Key behaviors (OpenCode 1.18.20):**
+- Subagent routing via YAML frontmatter fields: `description`, `mode=subagent`, `model`
+- During OpenCode 1.18.20 testing, newly added project agents became available after restarting OpenCode
+- Verified routing logged as `providerID`, `modelID`, `agent`, `mode=subagent` entries
+
+**Configuration:**
+- Canonical role definitions in `agents/` (harness-independent)
+- OpenCode adapters in `integrations/opencode/agents/` (thin bindings with YAML frontmatter)
+- Model assignments in adapters are repository-specific choices, not CMD requirements
+
+See [docs/integration.md](docs/integration.md) for detailed integration information.
 
 ## Repository Structure
 
@@ -93,6 +124,8 @@ Read AGENTS.md, then use prompts/scope.md to open a new spec for ...
 ├── skills/                  # Agent-agnostic domain knowledge files
 ├── scripts/guardrails/      # Standalone guardrail utilities for wrappers/CI/git hooks
 ├── templates/               # Starter files and manifests for seeding satellite service repositories
+├── docs/                    # Documentation (integration guides, tech docs)
+├── integrations/            # Harness-specific adapters (e.g., opencode/agents/)
 ├── BOOTSTRAPPING.md
 ├── FIRST_API_REPO_SESSION.md
 ├── FIRST_PLATFORM_REPO_SESSION.md
