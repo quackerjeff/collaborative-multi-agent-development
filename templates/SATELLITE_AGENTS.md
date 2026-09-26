@@ -66,7 +66,7 @@ This repository does not own:
 4. For meaningful user-facing work, define UI behavior before implementation is finalized.
 5. Verify SDK, framework, dependency, and integration usage before coding and record confirmed patterns in `docs/tech.md`.
 6. Execute implementation tasks.
-7. Run review, security review when needed, and QA validation before final documentation.
+7. Run review, then security review. Run QA validation when required by `steering/quality-engineering.md`, before final documentation.
 8. Finish by updating docs and clearing `.cmd/specs/currentspec.md`.
 
 ## Local Rules
