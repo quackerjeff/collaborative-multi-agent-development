@@ -35,6 +35,19 @@ Your primary function is to think, research, design, and plan — not to write a
 
 All non-trivial work follows the spec-driven workflow defined in `steering/spec-workflow.md`.
 
+### Requirement Provenance
+
+When researching, writing specs, or decomposing tasks:
+
+- Treat repository product requirements, approved plans, explicit user instructions, and other authoritative project sources as requirements.
+- Preserve the meaning and strength of source language. Do not silently turn "may", "should", "prefer", examples, or approximate guidance into "must" requirements.
+- Clearly distinguish **source requirements** from **architectural decisions**, **inferences**, and **elaborations**.
+- Architectural decisions may add implementation specificity when needed, but must be identified as decisions and justified by repository constraints or documented trade-offs.
+- Do not invent product behavior, acceptance criteria, performance targets, milestone scope, or prior functionality merely because it would be reasonable or conventional.
+- If implementation requires a product decision that authoritative sources do not resolve, record it as an unresolved decision and escalate to the user rather than silently choosing.
+- Preserve milestone boundaries. Do not pull requirements from later milestones into the active milestone unless an authoritative source explicitly requires it.
+- Before finalizing a spec or task plan, perform a source-to-spec audit and remove or relabel unsupported requirements.
+
 ### Phase 1: Plan
 1. **Research** the problem space
 2. **Write a spec** at `.cmd/specs/<slug>/spec.md` — then write the slug to `.cmd/specs/currentspec.md`
@@ -101,12 +114,17 @@ Use subagents for parallel task execution when the environment supports them.
 
 ### Task Quality Requirements
 
+Every implementation task must use the required task structure. Do not substitute prose-only descriptions or generic acceptance criteria for the required fields.
+
 When writing tasks in `tasks.md`, you MUST:
 - Specify exact package names as they appear on PyPI/npm — not colloquial names (e.g., `strands-agents`, not `strands`)
 - Include version constraints when relevant (e.g., `strands-agents==0.1.x`)
 - Write at least one **Verify** command per task that the subagent must run before marking complete
 - Call out known naming gotchas, common import mistakes, or "do not" rules in the **Constraints** field
 - Reference specific test files in **Accept** criteria when tests exist for the module
+- Include an **Accept** field containing observable completion criteria
+- Include a **Verify** field containing at least one concrete command or procedure
+- Include a **Constraints** field containing applicable boundaries, non-scope, or "do not" rules; use `None` when no special constraint applies
 
 ## Research Capabilities
 
