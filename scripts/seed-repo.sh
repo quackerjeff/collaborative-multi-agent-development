@@ -4,7 +4,7 @@ set -euo pipefail
 usage() {
   cat <<'USAGE'
 Usage:
-  seed-repo.sh --type <ui|api|worker|data|fullstack|platform> [--dest <directory>] [--no-git-init] <project-name>
+  seed-repo.sh --type <ui|api|worker|data|fullstack|platform|ios> [--dest <directory>] [--no-git-init] <project-name>
 
 Environment:
   CMD_LOCATION   Path to the canonical Collaborative Multi-Agent Development repository.
@@ -47,6 +47,33 @@ copy_profile_assets() {
   done < "$combined_manifest"
 
   rm -f "$combined_manifest"
+}
+
+copy_gitignore() {
+  local gitignore_tmpl="$CMD_ROOT/templates/repo/gitignore.tmpl"
+  if [ -f "$CMD_ROOT/templates/repo/gitignore-${REPO_TYPE}.tmpl" ]; then
+    gitignore_tmpl="$CMD_ROOT/templates/repo/gitignore-${REPO_TYPE}.tmpl"
+  fi
+  cp "$gitignore_tmpl" "$TARGET_DIR/.gitignore"
+}
+
+copy_ios_scaffold() {
+  local ios_tmpl="$CMD_ROOT/templates/ios"
+
+  mkdir -p "$TARGET_DIR/Sources" "$TARGET_DIR/Tests" "$TARGET_DIR/Resources/Assets.xcassets/AppIcon.appiconset"
+
+  render_template "$ios_tmpl/project.yml.tmpl" "$TARGET_DIR/project.yml"
+  render_template "$ios_tmpl/Sources/App.swift.tmpl" "$TARGET_DIR/Sources/App.swift"
+  render_template "$ios_tmpl/Sources/ContentView.swift.tmpl" "$TARGET_DIR/Sources/ContentView.swift"
+  render_template "$ios_tmpl/Resources/Info.plist.tmpl" "$TARGET_DIR/Resources/Info.plist"
+  render_template "$ios_tmpl/Tests/ContentViewTests.swift.tmpl" "$TARGET_DIR/Tests/ContentViewTests.swift"
+
+  cp "$ios_tmpl/Resources/Assets.xcassets/Contents.json" "$TARGET_DIR/Resources/Assets.xcassets/Contents.json"
+  cp "$ios_tmpl/Resources/Assets.xcassets/AppIcon.appiconset/Contents.json" "$TARGET_DIR/Resources/Assets.xcassets/AppIcon.appiconset/Contents.json"
+
+  mkdir -p "$TARGET_DIR/scripts"
+  render_template "$ios_tmpl/bootstrap.sh.tmpl" "$TARGET_DIR/scripts/bootstrap.sh"
+  chmod +x "$TARGET_DIR/scripts/bootstrap.sh"
 }
 
 init_repo() {
@@ -98,7 +125,7 @@ done
 }
 
 case "$REPO_TYPE" in
-  ui|api|worker|data|fullstack|platform)
+  ui|api|worker|data|fullstack|platform|ios)
     ;;
   *)
     fail "Unsupported repo type: $REPO_TYPE"
@@ -137,10 +164,63 @@ rm -f "$TARGET_DIR/AGENTS.md.bak"
 cp "$CMD_ROOT/templates/SYSTEM_CONTEXT.md" "$TARGET_DIR/SYSTEM_CONTEXT.md"
 render_template "$CMD_ROOT/templates/repo/README.md.tmpl" "$TARGET_DIR/README.md"
 render_template "$CMD_ROOT/templates/repo/tech.md.tmpl" "$TARGET_DIR/docs/tech.md"
-cp "$CMD_ROOT/templates/repo/gitignore.tmpl" "$TARGET_DIR/.gitignore"
+copy_gitignore
 
 chmod +x "$TARGET_DIR"/scripts/guardrails/*.sh 2>/dev/null || true
+
+if [ "$REPO_TYPE" = "ios" ]; then
+  copy_ios_scaffold
+
+  cat >> "$TARGET_DIR/README.md" <<'IOS_README'
+
+## iOS Project Setup
+
+This is a SwiftUI project managed by [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+
+### Bootstrap
+
+Run the bootstrap script to install dependencies and generate the Xcode project:
+
+```bash
+scripts/bootstrap.sh
+```
+
+The bootstrap script will:
+1. Install Homebrew (if not present)
+2. Install XcodeGen (if not present)
+3. Generate the `.xcodeproj` from `project.yml`
+4. Resolve Swift Package Manager dependencies
+5. Open the project in Xcode
+
+To skip opening Xcode automatically:
+
+```bash
+SKIP_OPEN=true scripts/bootstrap.sh
+```
+
+### Project Structure
+
+```
+Sources/          SwiftUI application code
+Tests/            Unit tests
+Resources/        Info.plist, asset catalogs
+project.yml       XcodeGen project definition (source of truth)
+```
+
+### Regenerating the Xcode Project
+
+After editing `project.yml`, regenerate with:
+
+```bash
+xcodegen generate
+```
+IOS_README
+fi
+
 init_repo
 
 printf 'Seeded %s repository at %s\n' "$REPO_TYPE" "$TARGET_DIR"
 printf 'Next: replace placeholders in AGENTS.md and SYSTEM_CONTEXT.md\n'
+if [ "$REPO_TYPE" = "ios" ]; then
+  printf 'Then: run scripts/bootstrap.sh to generate the Xcode project\n'
+fi

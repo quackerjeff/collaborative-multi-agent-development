@@ -1,0 +1,11 @@
+import Testing
+@testable import __PROJECT_NAME__
+
+@Suite("ContentView Tests")
+struct ContentViewTests {
+    @Test("App launches with content view")
+    func contentViewExists() {
+        let view = ContentView()
+        #expect(view.body != nil)
+    }
+}

@@ -37,6 +37,8 @@ $env:CMD_LOCATION = "C:\Development\AI\collaborative-multi-agent-development"
   Repositories containing both UI and backend delivery concerns.
 - `platform`
   Infrastructure, CI/CD, deployment, and operational repositories.
+- `ios`
+  Native iOS applications using SwiftUI and XcodeGen.
 
 ## What The Script Does
 
@@ -51,11 +53,11 @@ The bootstrap script:
 ## Usage
 
 ```bash
-seed-repo.sh --type <ui|api|worker|data|fullstack|platform> <project-name>
+seed-repo.sh --type <ui|api|worker|data|fullstack|platform|ios> <project-name>
 ```
 
 ```powershell
-seed-repo.ps1 -Type <ui|api|worker|data|fullstack|platform> -ProjectName <project-name>
+seed-repo.ps1 -Type <ui|api|worker|data|fullstack|platform|ios> -ProjectName <project-name>
 ```
 
 Optional flags:
@@ -85,6 +87,30 @@ Profile manifests live under `templates/profiles/`.
 
 Keep the manifests small and intentional. They should contain only the shared files that are broadly useful for that repo profile.
 
+## iOS-Specific Behavior
+
+When `--type ios` is used, the script also:
+
+1. copies an iOS scaffold into the target directory: `project.yml` (XcodeGen spec), SwiftUI source files under `Sources/`, asset catalogs and `Info.plist` under `Resources/`, and a starter test under `Tests/`
+2. generates `scripts/bootstrap.sh` in the target repository
+3. uses an iOS-specific `.gitignore` that excludes `*.xcodeproj`, `DerivedData/`, `Pods/`, and other Xcode artifacts
+4. appends iOS setup instructions to the generated `README.md`
+
+After seeding, run the bootstrap script to install XcodeGen (via Homebrew), generate the `.xcodeproj`, resolve SPM dependencies, and open the project in Xcode:
+
+```bash
+cd <project-name>
+scripts/bootstrap.sh
+```
+
+To skip opening Xcode automatically:
+
+```bash
+SKIP_OPEN=true scripts/bootstrap.sh
+```
+
+The generated `project.yml` is the source of truth for the Xcode project. Edit it to change targets, build settings, or dependencies, then regenerate with `xcodegen generate`.
+
 ## Repo-Local Files Created By The Script
 
 Each seeded repository gets local bootstrap files that should be customized:
@@ -108,3 +134,4 @@ For a concrete walkthrough of the first session in a seeded `ui` repo, see [FIRS
 For a concrete walkthrough of the first session in a seeded `api` repo, see [FIRST_API_REPO_SESSION.md](FIRST_API_REPO_SESSION.md).
 For a concrete walkthrough of the first session in a seeded `worker` repo, see [FIRST_WORKER_REPO_SESSION.md](FIRST_WORKER_REPO_SESSION.md).
 For a concrete walkthrough of the first session in a seeded `platform` repo, see [FIRST_PLATFORM_REPO_SESSION.md](FIRST_PLATFORM_REPO_SESSION.md).
+For a concrete walkthrough of the first session in a seeded `ios` repo, see [FIRST_IOS_REPO_SESSION.md](FIRST_IOS_REPO_SESSION.md).

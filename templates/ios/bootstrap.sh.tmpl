@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_NAME="__PROJECT_NAME__"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+fail() {
+  printf 'Error: %s\n' "$1" >&2
+  exit 1
+}
+
+info() {
+  printf '==> %s\n' "$1"
+}
+
+check_macos() {
+  [[ "$(uname)" == "Darwin" ]] || fail "This script requires macOS"
+}
+
+check_xcode_cli() {
+  if ! xcode-select -p >/dev/null 2>&1; then
+    info "Xcode Command Line Tools not found. Installing..."
+    xcode-select --install
+    fail "Re-run this script after Xcode Command Line Tools installation completes"
+  fi
+}
+
+install_homebrew() {
+  if ! command -v brew >/dev/null 2>&1; then
+    info "Homebrew not found. Installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+}
+
+install_xcodegen() {
+  if ! command -v xcodegen >/dev/null 2>&1; then
+    info "Installing XcodeGen..."
+    brew install xcodegen
+  else
+    info "XcodeGen already installed: $(xcodegen --version)"
+  fi
+}
+
+generate_project() {
+  info "Generating Xcode project from project.yml..."
+  cd "$PROJECT_DIR"
+  xcodegen generate
+}
+
+resolve_packages() {
+  if [ -f "$PROJECT_DIR/Package.swift" ]; then
+    info "Resolving Swift package dependencies..."
+    cd "$PROJECT_DIR"
+    swift package resolve
+  fi
+}
+
+open_project() {
+  local xcodeproj
+  xcodeproj=$(find "$PROJECT_DIR" -maxdepth 1 -name "*.xcodeproj" -print -quit)
+  if [ -n "$xcodeproj" ] && [ "${SKIP_OPEN:-}" != "true" ]; then
+    info "Opening $xcodeproj in Xcode..."
+    open "$xcodeproj"
+  fi
+}
+
+main() {
+  info "Bootstrapping $PROJECT_NAME"
+
+  check_macos
+  check_xcode_cli
+  install_homebrew
+  install_xcodegen
+  generate_project
+  resolve_packages
+  open_project
+
+  info "Bootstrap complete"
+  printf '\nNext steps:\n'
+  printf '  1. Replace placeholders in AGENTS.md and SYSTEM_CONTEXT.md\n'
+  printf '  2. Update the bundle identifier in project.yml\n'
+  printf '  3. Add your development team in Xcode signing settings\n'
+}
+
+main "$@"

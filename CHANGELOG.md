@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Added `ios` repository type to `seed-repo.sh` for native iOS projects using SwiftUI and XcodeGen
+- Added iOS scaffold templates: `project.yml`, SwiftUI entry point, asset catalogs, Info.plist, and starter test
+- Added `scripts/bootstrap.sh` generation for iOS repos to install XcodeGen, generate the Xcode project, and resolve SPM dependencies
+- Added iOS-specific `.gitignore` template
+- Added `copy_gitignore()` to `seed-repo.sh` for type-aware gitignore selection
+- Added `FIRST_IOS_REPO_SESSION.md` walkthrough
+- Updated `BOOTSTRAPPING.md` with iOS documentation
+
 ## 0.1.0
 
 - Initial release of the Codex multi-agent sample
